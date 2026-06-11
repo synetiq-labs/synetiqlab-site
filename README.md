@@ -1,6 +1,6 @@
 # synetiqlab-site
 
-Landing da marca-mãe **Synetiq Labs** (`synetiqlab.com`).
+Landing da marca-mãe **Synetiq Lab** (`synetiqlab.com`).
 
 - Site estático de uma página (`index.html`), sem build.
 - Fundo de rede neural interativo (canvas), com salvaguardas de performance (menos nós no mobile, respeita `prefers-reduced-motion`, pausa em aba oculta).
