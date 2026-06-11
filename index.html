@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synetiq Labs — Inteligência probabilística</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#06080f;--tx:#e9eef8;--mut:#8a96ab;--dim:#5e6a80;--cy:#22d3ee;--vi:#a78bfa;--line:rgba(255,255,255,.08);--grad:linear-gradient(120deg,#22d3ee,#a78bfa)}
+html,body{background:var(--bg);color:var(--tx);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#net{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(1100px 760px at 50% 14%,rgba(6,8,15,.16),rgba(6,8,15,.66))}
+.wrap{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:0 24px}
+nav{display:flex;align-items:center;gap:12px;padding:18px 0}
+.logo{width:34px;height:34px;border-radius:9px;background:var(--grad);position:relative;box-shadow:0 0 26px rgba(124,160,255,.5)}
+.logo::after{content:"";position:absolute;inset:8px;border-radius:5px;background:var(--bg)}
+.brand{font-weight:800;letter-spacing:.04em;font-size:15px}
+.brand span{color:var(--mut);font-weight:600}
+nav .cta{margin-left:auto;font-size:13px;font-weight:700;color:#06101e;background:var(--grad);padding:9px 16px;border-radius:10px;text-decoration:none}
+.hero{min-height:56vh;display:flex;flex-direction:column;justify-content:center;padding:18px 0 28px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.28em;color:var(--cy);margin-bottom:16px}
+h1{font-size:clamp(38px,7vw,72px);line-height:1.02;font-weight:800;letter-spacing:-.03em;max-width:14ch}
+h1 b{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+.sub{color:var(--mut);font-size:clamp(15px,2.2vw,20px);line-height:1.5;max-width:60ch;margin-top:16px}
+.actions{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap}
+.btn{font-size:15px;font-weight:700;padding:14px 24px;border-radius:12px;text-decoration:none;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn.p{background:var(--grad);color:#06101e;box-shadow:0 14px 40px -12px rgba(124,160,255,.7)}
+.btn.p:hover{transform:translateY(-2px)}
+.btn.s{border:1px solid var(--line);color:var(--tx)}
+.btn.s:hover{border-color:rgba(255,255,255,.25)}
+.manifesto{font-size:clamp(18px,3vw,26px);font-weight:600;line-height:1.4;max-width:24ch;margin:22px 0;color:#cfd7e6}
+.manifesto b{color:var(--vi)}
+section{padding:30px 0;border-top:1px solid var(--line)}
+.slabel{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+.product{display:grid;grid-template-columns:1.4fr 1fr;gap:0;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(167,139,250,.08));border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.product .info{padding:30px 32px}
+.product .chip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--cy);background:rgba(34,211,238,.12);padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.product h3{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.product p{color:var(--mut);font-size:15px;line-height:1.55;margin:10px 0 20px;max-width:42ch}
+.product .visual{position:relative;background:#080c16;border-left:1px solid var(--line);display:grid;place-items:center;min-height:200px;font-size:64px}
+.dot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 9px #34d399}
+.domains{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.dom{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:14px;padding:16px;font-size:14px;font-weight:600}
+.dom small{display:block;color:var(--dim);font-size:11px;font-weight:600;margin-top:5px}
+.dom.on{border-color:rgba(34,211,238,.35)}
+.dom.on .tag{color:var(--cy)}
+.tag{font-size:10px;font-weight:800;color:var(--dim);letter-spacing:.05em}
+footer{padding:28px 0 44px;color:var(--dim);font-size:12.5px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media(max-width:720px){.product{grid-template-columns:1fr}.product .visual{border-left:none;border-top:1px solid var(--line);min-height:130px;font-size:46px}}
+</style></head>
+<body>
+<canvas id="net"></canvas><div class="veil"></div>
+<div class="wrap">
+  <nav>
+    <div class="logo"></div><div class="brand">SYNETIQ LABS</div>
+    <a class="cta" href="https://footballmind.synetiqlab.com">FootballMind ↗</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">INTELIGÊNCIA PROBABILÍSTICA APLICADA</div>
+    <h1>Transformamos <b>incerteza</b> em probabilidade.</h1>
+    <p class="sub">Sistemas multiagentes, simulação de Monte Carlo e IA explicável que leem mundos complexos e dizem — com calibração e o porquê — o que provavelmente vai acontecer. Esportes hoje; finanças, logística e risco a seguir.</p>
+    <div class="actions">
+      <a class="btn p" href="https://footballmind.synetiqlab.com">Ver o FootballMind ao vivo →</a>
+      <a class="btn s" href="#oque">O que fazemos</a>
+    </div>
+  </header>
+
+  <div class="manifesto">Não prevemos o futuro. <b>Calculamos suas probabilidades</b> — e explicamos a aposta.</div>
+
+  <section id="footballmind">
+    <div class="slabel">Produto #1 · ao vivo</div>
+    <div class="product">
+      <div class="info">
+        <span class="chip"><span class="dot"></span>NO AR · COPA 2026</span>
+        <h3>FootballMind</h3>
+        <p>A Copa do Mundo lida por 10 modelos e um consenso ponderado, com simulações de Monte Carlo recalculadas a cada rodada e o raio-x de cada previsão. A vitrine viva do motor Synetiq.</p>
+        <a class="btn p" href="https://footballmind.synetiqlab.com">Entrar no FootballMind →</a>
+      </div>
+      <div class="visual">⚽🧠</div>
+    </div>
+  </section>
+
+  <section id="oque">
+    <div class="slabel">Um motor, vários mundos</div>
+    <div class="domains">
+      <div class="dom on"><span class="tag">ATIVO</span><br>Esportes<small>previsão & simulação de torneios</small></div>
+      <div class="dom"><span class="tag">EM BREVE</span><br>Finanças<small>risco & cenários de mercado</small></div>
+      <div class="dom"><span class="tag">EM BREVE</span><br>Logística<small>otimização sob incerteza</small></div>
+      <div class="dom"><span class="tag">EM BREVE</span><br>Risco<small>probabilidade de eventos</small></div>
+      <div class="dom"><span class="tag">PESQUISA</span><br>Comportamento<small>inteligência coletiva</small></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Synetiq Labs · inteligência probabilística</span>
+    <span>synetiqlab.com</span>
+  </footer>
+</div>
+<script>
+const cv=document.getElementById('net'),ctx=cv.getContext('2d');
+let W,H,DPR=Math.min(devicePixelRatio||1,2),nodes=[],mx=-999,my=-999;
+function resize(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
+ const n=Math.min(W<700?54:100,Math.round(W*H/14000));nodes=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,c:Math.random()<.5?'#22d3ee':'#a78bfa'}))}
+resize();addEventListener('resize',resize);
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY});
+addEventListener('pointerleave',()=>{mx=-999;my=-999});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let running=true;
+document.addEventListener('visibilitychange',()=>{const was=running;running=!document.hidden;if(running&&!was&&!reduce)loop()});
+function loop(){if(!running)return;ctx.clearRect(0,0,W,H);
+ for(const n of nodes){n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;
+  const dx=n.x-mx,dy=n.y-my,d=Math.hypot(dx,dy);if(d<140){const f=(140-d)/140*.8;n.x+=dx/d*f;n.y+=dy/d*f}}
+ for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j];const dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
+   if(d<128){ctx.strokeStyle='rgba(125,160,230,'+(.16*(1-d/128))+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}
+ for(const n of nodes){const near=Math.hypot(n.x-mx,n.y-my)<150;ctx.beginPath();ctx.arc(n.x,n.y,near?2.6:1.7,0,7);ctx.fillStyle=n.c;ctx.shadowColor=n.c;ctx.shadowBlur=near?14:6;ctx.fill();ctx.shadowBlur=0;
+  if(near){ctx.strokeStyle='rgba(167,139,250,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(mx,my);ctx.stroke()}}
+ if(running&&!reduce)requestAnimationFrame(loop)}
+loop();
+</script>
+</body></html>
